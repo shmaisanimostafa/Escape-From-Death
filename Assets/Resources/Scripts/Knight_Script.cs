@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEnhine.UI;
 
 public class Knight_Script : MonoBehaviour
 {
@@ -23,6 +24,16 @@ public class Knight_Script : MonoBehaviour
     private float Timer;
     [SerializeField] float JumpPower = 5f;
     [SerializeField] float MoveSpeed = 5f;
+    
+    //Header
+    [Header("Health")]
+    
+    //Slider
+    Slider HealthSlider;
+    
+    //Integers
+    [SerializeField] private int Health, MaxHealth;
+    
 
     //Start Method
     void Start()
@@ -133,6 +144,12 @@ public class Knight_Script : MonoBehaviour
     {
         Weapon = other.gameObject;
         Destroy(Weapon);
+    }
+    
+    public void ApplyDamage(int Damage)
+    {
+    Health -= Damage;
+    HealthSlider.value = Health;
     }
 }
 

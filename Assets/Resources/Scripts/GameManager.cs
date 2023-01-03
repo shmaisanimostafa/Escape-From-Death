@@ -101,4 +101,12 @@ public class GameManager : MonoBehaviour
    //    StartCoroutine(HealthPointSpawner());
 
     }
+    void OnCollisionEnter2D(Collision Col)
+    {
+    if(Col.Collider.GameObject.CompareTag("Player"))
+    {
+    Knight_Script.ApplyDamage(25); 
+    }
+    Destroy(GameObject);
+    }
 }

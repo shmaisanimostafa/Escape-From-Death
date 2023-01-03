@@ -102,17 +102,3 @@ public class GameManager : MonoBehaviour
 
     }
 }
-
-//Missions:
-
-//Use UI, Coroutines, Events
-//Add explosion and destroy the weapon when hits the ground
-//Add a special explosion when the weapon hits the knight, that decreses 1 health point
-//Triple the Health points 
-//Add the ability to gain more health point collected hardly tell 5 points
-//Add a ninja that joins every 1min and start shooting
-//Add the ability to shoot the falling weapons and the ninja
-//Increase the falling weapons with the increase of time to make it harder with time
-//Ability to collect coins which will add a competition and leaderboard
-//Organize and name the project will
-//Add the ability to get donations

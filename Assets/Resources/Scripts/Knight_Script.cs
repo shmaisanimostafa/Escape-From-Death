@@ -136,22 +136,4 @@ public class Knight_Script : MonoBehaviour
     }
 }
 
-/* the ninja enters the screen with a jump and says to the knight I will kill you 
- * the ninja plays a thunder on the screen and disappears
- * 
- * when the weapons hit the knight,
- * play hit explosion on the knight
- * decrease the hearts by 1
- * when the hurts over
- * destroy the knight with death explosion
- * play Game Over UI
- * 
- * to make the game competetional,
- * add time to the game to see who stays the most
- * add leaderboard
- * make the knifes quantity/second increases with time
- * 
- * Game Over animation at the end
- * */
 
-//When Hit, Body.AddForce(Vector2.right)

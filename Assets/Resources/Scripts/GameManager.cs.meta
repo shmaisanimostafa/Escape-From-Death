@@ -3,7 +3,10 @@ guid: e54366e4593eb894eb94c97f8834d121
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Coin: {fileID: 8639831895170526898, guid: 6507b7921fd4a5b45a83dafd3987dc29, type: 3}
+  - Knife: {fileID: 8883591252083050264, guid: 14d810ba33b9cb2448320466a61b02e4, type: 3}
+  - Thunder: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

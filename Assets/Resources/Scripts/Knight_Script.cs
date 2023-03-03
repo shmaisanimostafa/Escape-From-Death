@@ -3,46 +3,44 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEnhine.UI;
+using UnityEngine.UI;
 
 public class Knight_Script : MonoBehaviour
 {
     //Integers
-    private int jumpCount = 0;
+    [SerializeField] private int jumpCount = 0;
 
     //Rigidbody 2D
-    public Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
     //Animator
-    public Animator animator;
+    [SerializeField] private Animator animator;
 
     //GameObjects
-    private GameObject Weapon;
+    [SerializeField] private GameObject Weapon;
 
     //Floats
-    private float Direction;
-    private float Timer;
-    [SerializeField] float JumpPower = 5f;
-    [SerializeField] float MoveSpeed = 5f;
+    [SerializeField] private float Direction;
+    [SerializeField] private float Timer;
+    [SerializeField] private float JumpPower = 5f;
+    [SerializeField] private float MoveSpeed = 5f;
     
     //Header
     [Header("Health")]
-    
+
     //Slider
-    Slider HealthSlider;
+    [SerializeField] Slider HealthSlider;
     
     //Integers
     [SerializeField] private int Health, MaxHealth;
     
 
-    //Start Method
     void Start()
 
     {
         animator.SetInteger("HealthPoint", 3);
     }
 
-    //Update Method
     void Update()
 
     {
@@ -68,33 +66,28 @@ public class Knight_Script : MonoBehaviour
         //Walking Behavior
         if (Input.GetAxis("Horizontal") != 0){
 
-            //Run Behavior
-            //while (Input.GetKey("left shift"))
-            //{
-            //    MoveSpeed *= MoveSpeed;
-            //    animator.SetBool("isRunning", true);
-            //}
-            //End Run Behavior
-
+            //  Run Behavior
+            while (Input.GetKey("left shift"))
+            {
+                MoveSpeed *= MoveSpeed;
+                animator.SetBool("isRunning", true);
+            }
             Move();
         } else
         {
             animator.SetBool("isWalking", false);
         }
-        //Ending Walking Behavior
 
-            //Walking and Not Jumping (Idle or not)
+            //This script specifies whether the knight is idle or not
         if (Direction == 0 && !Input.GetKeyDown(KeyCode.Space))
         {
             animator.SetBool("isJumping", false);
             animator.SetBool("isWalking", false);
             animator.SetBool("isIdle", true);
         }
-        //Ending Walking and Not Jumping (Idle or not)
-
-  //      OnTriggerEnter2D(Collider other);
+    
     }
-    //Jump Method
+    //Methods
     void Jump()
     {
         jumpCount++; //The number of jumps increased, used to limit the jumps to 2.
@@ -112,7 +105,6 @@ public class Knight_Script : MonoBehaviour
         CancelInvoke("ResetjumpCount");
         Invoke("ResetjumpCount", 3f);
     }
-    //Move Method
     void Move()
     {
         animator.SetBool("isWalking", true);
@@ -134,23 +126,33 @@ public class Knight_Script : MonoBehaviour
         }
 
     }
-    //JumpCounterReset Method
     void ResetjumpCount()
     {
         jumpCount = 0;
-    }
+    }    
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Weapon = other.gameObject;
-        Destroy(Weapon);
-    }
-    
+    //The script below applies damage for the knight with the quantity that I want,where it can be used for many weapons
     public void ApplyDamage(int Damage)
     {
     Health -= Damage;
     HealthSlider.value = Health;
     }
-}
 
+    //The script below should detect the knife if touches the knight,
+    //then it decreases from his health...
+    //And if it is a coin it increases the coin counter...
+    //If the knife hits the knight it creates an explosion with animation
+    //which plays a force on the knight then destroys
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        string item = collision.GetComponent<SpriteRenderer>().sprite.name;
+        if (item.Equals("knife"))
+        {
+            print("Ouchhh");
+            Destroy(collision.gameObject);
+        }
+    }
+
+    }
 

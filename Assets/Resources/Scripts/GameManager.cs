@@ -2,43 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    //GameObjects
     [SerializeField] GameObject Coin;
-    [SerializeField] GameObject Knife;
-    [SerializeField] GameObject Thunder;
-//    [SerializeField] GameObject HealthPoint;
-    [SerializeField] Sprite[] WeaponImages;
-    float height, width;
-    float thunderTimer;
-    public float thunderCounter;
-    public float thunderScale;
 
-    // Start is called before the first frame update
+    //[SerializeField] GameObject Thunder;
+
+    //    [SerializeField] GameObject HealthPoint;
+
+
+    //Floats
+    [SerializeField] private float height, width;
+    //[SerializeField] private float thunderTimer;
+    //public float thunderCounter;
+    //public float thunderScale;
+
+    //Integers
+    [SerializeField] private int CoinCounter;
+
+    //Text
+    [SerializeField] private Text CoinCount;
+    [SerializeField] private Text PlayerName;
+
     void Start()
     {
-        thunderCounter = Random.Range(3, 5);
-        thunderScale = Random.Range(-1, 1.68f);
-        thunderTimer += Time.deltaTime;
+        //thunderCounter = Random.Range(3, 5);
+        //thunderScale = Random.Range(-1, 1.68f);
+        //thunderTimer += Time.deltaTime;
 
         Vector3 screenWorld = new Vector3(Screen.width, Screen.height, 0);
         screenWorld = Camera.main.ScreenToWorldPoint(screenWorld);
         height = screenWorld.y;
         width = screenWorld.x;
         StartCoroutine(CoinSpawner());
-        StartCoroutine(WeaponSpawner());
         //   StartCoroutine(ThunderSpawner());
         //   StartCoroutine(HealthPointSpawner());
+
     }
 
 
-    // Update is called once per frame
     void Update()
     {
 
     }
 
+    //Enumerators
     IEnumerator CoinSpawner()
     {
         while (true)
@@ -50,16 +61,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator WeaponSpawner()
-    {
-        while (true)
-        {
-            GameObject v = GameObject.Instantiate(Knife);
-            v.transform.position = new Vector3(Random.Range(-width, width), height, 0);
-            v.GetComponent<SpriteRenderer>().sprite = WeaponImages[Random.Range(0, WeaponImages.Length)];
-            yield return new WaitForSeconds(Random.Range(2f, 4f));
-        }
-    }
 
     //IEnumerator ThunderSpawner()
     //{
@@ -90,6 +91,9 @@ public class GameManager : MonoBehaviour
     //}
 
     //Pause Method
+
+    //Methods
+
     public void Pause()
     {
         StopAllCoroutines();
@@ -97,16 +101,13 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         StartCoroutine(CoinSpawner());
-        StartCoroutine(WeaponSpawner());
    //    StartCoroutine(HealthPointSpawner());
 
     }
-    void OnCollisionEnter2D(Collision Col)
+    public void CoinIncrementer()
     {
-    if(Col.Collider.GameObject.CompareTag("Player"))
-    {
-    Knight_Script.ApplyDamage(25); 
+        CoinCount.text = " " + CoinCounter;
     }
-    Destroy(GameObject);
-    }
+
 }
+//We should take text from input and close it so it will be shown in the settings top bar.
